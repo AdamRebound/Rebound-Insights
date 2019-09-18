@@ -1,0 +1,16 @@
+version: "2.2"
+services:
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.2.0
+    container_name: logstash
+    command: logstash -f /etc/logstash/conf.d/logstash.conf
+    volumes:
+      - ./confs/logstash.conf:/etc/logstash/conf.d/logstash.conf
+      - ./mysql-connector-java-8.0.17.jar:/mysql-connector-java-8.0.17.jar
+    environment:
+      LS_JAVA_OPTS: "-Xmx2g -Xms2g"
+    healthcheck:
+      test: bin/logstash -t
+      interval: 60s
+      timeout: 50s
+      retries: 5

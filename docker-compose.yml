@@ -1,16 +1,11 @@
 version: "2.2"
 services:
   logstash:
-    image: docker.elastic.co/logstash/logstash:7.2.0
     container_name: logstash
-    command: logstash -f /etc/logstash/conf.d/logstash.conf
+    network_mode: host
+    image: docker.elastic.co/logstash/logstash:7.2.0
     volumes:
-      - ./confs/logstash.conf:/etc/logstash/conf.d/logstash.conf
-      - ./mysql-connector-java-8.0.17.jar:/mysql-connector-java-8.0.17.jar
+      - ./confs/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - ./mssql-jdbc-7.4.1.jre8.jar:/usr/share/logstash/logstash-core/lib/jars/mssql-jdbc-7.4.1.jre8.jar
     environment:
       LS_JAVA_OPTS: "-Xmx2g -Xms2g"
-    healthcheck:
-      test: bin/logstash -t
-      interval: 60s
-      timeout: 50s
-      retries: 5

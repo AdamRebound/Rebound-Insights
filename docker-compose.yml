@@ -5,7 +5,7 @@ services:
     network_mode: host
     image: docker.elastic.co/logstash/logstash:7.2.0
     volumes:
-      - ./confs/precalc-demo.logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - ./confs/precalculated.logstash.conf:/usr/share/logstash/pipeline/logstash.conf
       - ./mssql-jdbc-7.4.1.jre8.jar:/usr/share/logstash/logstash-core/lib/jars/mssql-jdbc-7.4.1.jre8.jar
     environment:
       LS_JAVA_OPTS: "-Xmx2g -Xms2g"

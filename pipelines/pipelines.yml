@@ -4,3 +4,8 @@
 - pipeline.id: orders
   path.config: "/usr/share/logstash/pipeline/logstash_orders.conf"
   pipeline.workers: 1
+
+# - pipeline.id: create_csv_end_send_via_email
+#   path.config: "/usr/share/logstash/pipeline/send_csv_by_email.example.logstash.conf"
+#   pipeline.workers: 2
+  

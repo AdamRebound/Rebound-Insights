@@ -6,10 +6,13 @@ services:
     user: 1000:1000
     image: docker.elastic.co/logstash/logstash:7.2.0
     volumes:
-      # - ./confs/migration_item_base.returns.logstash.conf:/usr/share/logstash/pipeline/logstash_returns.conf
-      # - ./confs/migration_item_base.orders.logstash.conf:/usr/share/logstash/pipeline/logstash_orders.conf
+      - ./confs/migration_item_base.returns.logstash.conf:/usr/share/logstash/pipeline/logstash_returns.conf
+      - ./confs/migration_item_base.orders.logstash.conf:/usr/share/logstash/pipeline/logstash_orders.conf
       - ./confs/migration_order_base.returns.logstash.conf:/usr/share/logstash/pipeline/logstash_returns.conf
       - ./confs/migration_order_base.orders.logstash.conf:/usr/share/logstash/pipeline/logstash_orders.conf
+
+      # - ./confs/send_csv_by_email.example.logstash.conf:/usr/share/logstash/pipeline/send_csv_by_email.example.logstash.conf
+
       - ./pipelines/pipelines.yml:/usr/share/logstash/config/pipelines.yml:ro
       - ./mysql-connector-java-8.0.17.jar:/usr/share/logstash/logstash-core/lib/jars/mysql-connector-java-8.0.17.jar
     environment:

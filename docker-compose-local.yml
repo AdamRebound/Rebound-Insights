@@ -6,15 +6,19 @@ services:
     user: 1000:1000
     image: docker.elastic.co/logstash/logstash:7.2.0
     volumes:
-      # - ./confs/migration_item_base.returns.logstash.conf:/usr/share/logstash/pipeline/logstash_returns.conf
-      # - ./confs/migration_item_base.orders.logstash.conf:/usr/share/logstash/pipeline/logstash_orders.conf
-      - ./confs/migration_order_base.returns.logstash.conf:/usr/share/logstash/pipeline/logstash_returns.conf
-      - ./confs/migration_order_base.orders.logstash.conf:/usr/share/logstash/pipeline/logstash_orders.conf
+      - ./confs/migration_item_base.returns.logstash.conf:/usr/share/logstash/pipeline/logstash_returns.conf
+      - ./confs/migration_item_base.orders.logstash.conf:/usr/share/logstash/pipeline/logstash_orders.conf
+      # - ./confs/migration_order_base.returns.logstash.conf:/usr/share/logstash/pipeline/logstash_returns.conf
+      # - ./confs/migration_order_base.orders.logstash.conf:/usr/share/logstash/pipeline/logstash_orders.conf
+
+      # - ./confs/send_csv_by_email.example.logstash.conf:/usr/share/logstash/pipeline/send_csv_by_email.example.logstash.conf
+
       - ./pipelines/pipelines.yml:/usr/share/logstash/config/pipelines.yml:ro
       - ./mysql-connector-java-8.0.17.jar:/usr/share/logstash/logstash-core/lib/jars/mysql-connector-java-8.0.17.jar
     environment:
       LS_JAVA_OPTS: "-Xmx2g -Xms2g"
       XPACK_MONITORING_ENABLED: "false"
+      ES_HOST: "localhost:9200"
     
   es:
     container_name: es
@@ -34,3 +38,20 @@ services:
         hard: 65536
     volumes:
       - ./esdata:/usr/share/elasticsearch/data
+
+  kibana:
+    network_mode: host
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:7.2.0
+    volumes:
+      - ./kibana.yml:/usr/share/kibana/config/kibana.yml
+    environment:
+      - SERVER_NAME=kibana.localhost
+      - ELASTICSEARCH_URL=http://localhost:9200
+      - ELASTICSEARCH_HOST=localhost
+      - ELASTICSEARCH_PORT=9200
+    ulimits:
+      nproc: 65535
+      memlock:
+        soft: -1
+        hard: -1

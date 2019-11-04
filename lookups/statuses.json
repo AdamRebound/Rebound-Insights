@@ -1,0 +1,20 @@
+{
+    "10": "Return Registered Online",
+    "20": "Received by the carrier",
+    "30": "In transit to our local hub",
+    "40": "Received at our local hub",
+    "43": "Processed by hub",
+    "45": "Parcel has been added to pallet",
+    "50": "In transit to the retailer",
+    "60": "Delivered to the retailer",
+    "70": "Parcel refunded by retailer",
+    "90": "Parcel has been extracted from pallet",
+    "100": "Parcel delayed",
+    "110": "Parcel lost",
+    "120": "Collection attempt failed",
+    "200": "Parcel under investigation",
+    "201": "Awaiting customs clearance",
+    "202": "Customs clearance completed",
+    "300": "Cancel requested",
+    "310": "Cancelled"
+}

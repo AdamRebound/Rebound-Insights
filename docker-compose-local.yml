@@ -4,26 +4,41 @@ services:
     container_name: logstash
     network_mode: host
     user: 1000:1000
-    image: docker.elastic.co/logstash/logstash:7.2.0
+    image: docker.elastic.co/logstash/logstash:7.4.0
     volumes:
-      - ./confs/migration_item_base.returns.logstash.conf:/usr/share/logstash/pipeline/logstash_returns.conf
-      - ./confs/migration_item_base.orders.logstash.conf:/usr/share/logstash/pipeline/logstash_orders.conf
-      # - ./confs/migration_order_base.returns.logstash.conf:/usr/share/logstash/pipeline/logstash_returns.conf
-      # - ./confs/migration_order_base.orders.logstash.conf:/usr/share/logstash/pipeline/logstash_orders.conf
-
-      # - ./confs/send_csv_by_email.example.logstash.conf:/usr/share/logstash/pipeline/send_csv_by_email.example.logstash.conf
-
+      - ./confs/insights_confs/:/usr/share/logstash/pipeline/
       - ./pipelines/pipelines.yml:/usr/share/logstash/config/pipelines.yml:ro
+
+      - ./lookups/:/usr/share/logstash/lookups/
       - ./mysql-connector-java-8.0.17.jar:/usr/share/logstash/logstash-core/lib/jars/mysql-connector-java-8.0.17.jar
     environment:
+      # LogStash container settings
       LS_JAVA_OPTS: "-Xmx2g -Xms2g"
       XPACK_MONITORING_ENABLED: "false"
+      # Configuration files variables
+      # Lookups
+      CLIENTS_FILE: "/usr/share/logstash/lookups/clients.json"
+      COUNTRIES_FILE: "/usr/share/logstash/lookups/countries.json"
+      SERVICES_FILE: "/usr/share/logstash/lookups/services.json"
+      CARRIERS_FILE: "/usr/share/logstash/lookups/carriers.json"
+      STATUSES_FILE: "/usr/share/logstash/lookups/statuses.json"
+      # DB connection settings
+      JDBC_CONNECTION_URL: "jdbc:mysql://35.205.176.248:3306/returns"
+      JDBC_CONNECTION_USER: "rebound_user"
+      JDBC_CONNECTION_PASSWORD: "GJEMMzNkNG9m"
+      # DB query variables
+      DB_QUERY_SELECT_FROM_DATE: "20190601"
+      # Cron job schedule
+      CRON_SCHEDULE: "0 0 * * *"   # every day at UTC 00:00
+      # ES connection settings 
       ES_HOST: "localhost:9200"
+      ES_USER: "elastic"
+      ES_PASSWORD: "82dgbsYKnBANA62f"
     
   es:
     container_name: es
     network_mode: host
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.2.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
     environment:
       discovery.type: single-node
       cluster.name: "docker-cluster"

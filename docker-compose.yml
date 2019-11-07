@@ -10,6 +10,7 @@ services:
       - ./pipelines/pipelines.yml:/usr/share/logstash/config/pipelines.yml:ro
       - ./lookups/:/usr/share/logstash/lookups/
       - ./mysql-connector-java-8.0.17.jar:/usr/share/logstash/logstash-core/lib/jars/mysql-connector-java-8.0.17.jar
+      - ./mssql-jdbc-7.4.1.jre8.jar:/usr/share/logstash/logstash-core/lib/jars/mssql-jdbc-7.4.1.jre8.jar
     environment:
       # LogStash container settings
       LS_JAVA_OPTS: "-Xmx2g -Xms2g"
@@ -29,6 +30,7 @@ services:
       DB_QUERY_SELECT_FROM_DATE: "20190601"
       # Cron job schedule
       CRON_SCHEDULE: "0 0 * * *"   # every day at UTC 00:00
+      CRON_SCHEDULE_LOOKUPS: "0 23 * * *"  # every day at UTC 23:00
       # ES connection settings
       ES_HOST: "localhost:8080"
       ES_USER: "elastic"

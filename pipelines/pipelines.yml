@@ -13,3 +13,19 @@
 - pipeline.id: trackings_etl
   path.config: "/usr/share/logstash/pipeline/trackings.logstash.conf"
   pipeline.workers: 1
+
+- pipeline.id: carriers_lookup
+  path.config: "/usr/share/logstash/pipeline/lookup.carriers.logstash.conf"
+  pipeline.workers: 1
+- pipeline.id: clients_lookup
+  path.config: "/usr/share/logstash/pipeline/lookup.clients.logstash.conf"
+  pipeline.workers: 1
+- pipeline.id: countries_lookup
+  path.config: "/usr/share/logstash/pipeline/lookup.countries.logstash.conf"
+  pipeline.workers: 1
+- pipeline.id: services_lookup
+  path.config: "/usr/share/logstash/pipeline/lookup.services.logstash.conf"
+  pipeline.workers: 1
+- pipeline.id: statuses_lookup
+  path.config: "/usr/share/logstash/pipeline/lookup.statuses.logstash.conf"
+  pipeline.workers: 1

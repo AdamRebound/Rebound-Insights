@@ -13,7 +13,7 @@ services:
       - ./mssql-jdbc-7.4.1.jre8.jar:/usr/share/logstash/logstash-core/lib/jars/mssql-jdbc-7.4.1.jre8.jar
     environment:
       # LogStash container settings
-      LS_JAVA_OPTS: "-Xmx2g -Xms2g"
+      LS_JAVA_OPTS: "-Xmx4g -Xms4g"
       XPACK_MONITORING_ENABLED: "false"
       # Configuration files variables
       # Lookups
@@ -27,7 +27,7 @@ services:
       JDBC_CONNECTION_USER: "rebound_user"
       JDBC_CONNECTION_PASSWORD: "GJEMMzNkNG9m"
       # DB query variables
-      DB_QUERY_SELECT_FROM_DATE: "20190601"
+      DB_QUERY_SELECT_FROM_DATE: "20190101"
       # Cron job schedule
       CRON_SCHEDULE: "0 0 * * *"   # every day at UTC 00:00
       CRON_SCHEDULE_LOOKUPS: "0 23 * * *"  # every day at UTC 23:00

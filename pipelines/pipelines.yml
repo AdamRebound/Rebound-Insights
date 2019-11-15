@@ -1,18 +1,23 @@
 - pipeline.id: orders_etl
   path.config: "/usr/share/logstash/pipeline/orders.logstash.conf"
   pipeline.workers: 2
-- pipeline.id: orders_items_etl
-  path.config: "/usr/share/logstash/pipeline/orders_items.logstash.conf"
-  pipeline.workers: 2
+  pipeline.batch.size: 10000
 - pipeline.id: returns_etl
   path.config: "/usr/share/logstash/pipeline/returns.logstash.conf"
-  pipeline.workers: 2
-- pipeline.id: returns_items_etl
-  path.config: "/usr/share/logstash/pipeline/returns_items.logstash.conf"
-  pipeline.workers: 2
+  pipeline.workers: 3
+  pipeline.batch.size: 10000
 - pipeline.id: trackings_etl
   path.config: "/usr/share/logstash/pipeline/trackings.logstash.conf"
-  pipeline.workers: 4
+  pipeline.workers: 3
+  pipeline.batch.size: 10000
+# - pipeline.id: orders_items_etl
+#   path.config: "/usr/share/logstash/pipeline/orders_items.logstash.conf"
+#   pipeline.workers: 2
+#   pipeline.batch.size: 10000
+# - pipeline.id: returns_items_etl
+#   path.config: "/usr/share/logstash/pipeline/returns_items.logstash.conf"
+#   pipeline.workers: 2
+#   pipeline.batch.size: 10000
 
 # - pipeline.id: carriers_lookup
 #   path.config: "/usr/share/logstash/pipeline/lookup.carriers.logstash.conf"

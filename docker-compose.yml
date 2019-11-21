@@ -23,7 +23,7 @@ services:
       CARRIERS_FILE: "/usr/share/logstash/lookups/carriers.json"
       STATUSES_FILE: "/usr/share/logstash/lookups/statuses.json"
       # DB connection settings
-      JDBC_CONNECTION_URL: "jdbc:mysql://35.205.176.248:3306/returns"
+      JDBC_CONNECTION_URL: "jdbc:mysql://35.205.176.248:3306/returns?useCursorFetch=true"
       JDBC_CONNECTION_USER: "rebound_user"
       JDBC_CONNECTION_PASSWORD: "GJEMMzNkNG9m"
       # DB query variables
@@ -33,6 +33,6 @@ services:
       CRON_SCHEDULE: "0 0 * * *"   # every day at UTC 00:00
       CRON_SCHEDULE_LOOKUPS: "0 23 * * *"  # every day at UTC 23:00
       # ES connection settings
-      ES_HOST: "localhost:8080"
+      ES_HOST: "http://34.70.185.204:9200"
       ES_USER: "elastic"
       ES_PASSWORD: "82dgbsYKnBANA62f"

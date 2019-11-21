@@ -27,8 +27,8 @@ services:
       JDBC_CONNECTION_USER: "rebound_user"
       JDBC_CONNECTION_PASSWORD: "GJEMMzNkNG9m"
       # DB query variables
-      DB_QUERY_SELECT_FROM_DATE: "20190101"
-      DB_QUERY_SELECT_FROM_DATE_UNIX_TIMESTAMP: 1546300800
+      DB_QUERY_SELECT_FROM_DATE: "20181101"
+      DB_QUERY_SELECT_FROM_DATE_UNIX_TIMESTAMP: 1541030400
       # Cron job schedule
       CRON_SCHEDULE: "0 0 * * *"   # every day at UTC 00:00
       CRON_SCHEDULE_LOOKUPS: "0 23 * * *"  # every day at UTC 23:00

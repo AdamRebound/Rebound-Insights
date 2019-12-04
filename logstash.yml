@@ -1,0 +1,12 @@
+- pipeline.id: orders_etl
+  path.config: "/usr/share/logstash/pipeline/orders.logstash.conf"
+  pipeline.workers: 2
+  pipeline.batch.size: 100000
+- pipeline.id: returns_etl
+  path.config: "/usr/share/logstash/pipeline/returns.logstash.conf"
+  pipeline.workers: 3
+  pipeline.batch.size: 100000
+- pipeline.id: trackings_etl
+  path.config: "/usr/share/logstash/pipeline/trackings.logstash.conf"
+  pipeline.workers: 3
+  pipeline.batch.size: 100000
